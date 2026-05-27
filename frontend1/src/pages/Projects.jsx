@@ -1,34 +1,7 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import './App.css'
-import Navbar from './components/Navbar'
-import About from './pages/About'
+import ProjectCard from '../components/ProjectCard'
 
-function ProjectCard({ project }) {
-  return (
-    <div className="project-card">
-      <div className="poster">
-        <div className="avatar">{project.posterInitial}</div>
-        <div>
-          <p className="poster-name">{project.posterName}</p>
-          <p className="poster-role">Project Owner</p>
-        </div>
-      </div>
-
-      <div className="project-info">
-        <h2>{project.title}</h2>
-        <p>{project.description}</p>
-      </div>
-
-      <div className="skill-box">
-        <span>Skill Needed</span>
-        <strong>{project.skill}</strong>
-      </div>
-    </div>
-  )
-}
-
-function HomePage() {
+function Projects() {
   const [filter, setFilter] = useState('All')
 
   const projects = [
@@ -62,18 +35,6 @@ function HomePage() {
 
   return (
     <>
-      <section className="hero">
-        <div className="hero-text">
-          <h1>Project Connect</h1>
-          <p>
-            Find student projects, discover internship-style experience,
-            and connect with teammates who need your skills.
-          </p>
-        </div>
-
-        <div className="hero-image">💼</div>
-      </section>
-
       <header className="top-bar">
         <h2>Project Board</h2>
         <button className="post-button">Post Project</button>
@@ -102,19 +63,4 @@ function HomePage() {
   )
 }
 
-function App() {
-  return (
-    <BrowserRouter>
-      <div className="app">
-        <Navbar />
-
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  )
-}
-
-export default App
+export default Projects
