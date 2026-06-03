@@ -30,8 +30,12 @@ function ProjectCard({ project }) {
 
 function HomePage() {
   const [filter, setFilter] = useState('All')
+  const [showForm, setShowForm] = useState(false)
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [skill, setSkill] = useState('Frontend')
 
-  const projects = [
+  const [projects, setProjects] = useState([
     {
       title: 'Internship Finder App',
       description: 'A web app that helps students find internship opportunities.',
@@ -53,7 +57,25 @@ function HomePage() {
       posterInitial: 'A',
       skill: 'UI/UX',
     },
-  ]
+  ])
+
+  function handleAddProject(event) {
+    event.preventDefault()
+
+    const newProject = {
+      title: title,
+      description: description,
+      posterName: 'Yuki Kakuda',
+      posterInitial: 'Y',
+      skill: skill,
+    }
+
+    setProjects([...projects, newProject])
+    setTitle('')
+    setDescription('')
+    setSkill('Frontend')
+    setShowForm(false)
+  }
 
   const filteredProjects =
     filter === 'All'
@@ -76,8 +98,47 @@ function HomePage() {
 
       <header className="top-bar">
         <h2>Project Board</h2>
-        <button className="post-button">Post Project</button>
+        <button
+          className="post-button"
+          onClick={() => setShowForm(!showForm)}
+        >
+          Post Project
+        </button>
       </header>
+
+      {showForm && (
+        <form className="project-form" onSubmit={handleAddProject}>
+          <h2>Add New Project</h2>
+
+          <input
+            type="text"
+            placeholder="Project title"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+            required
+          />
+
+          <textarea
+            placeholder="Project description"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+            required
+          />
+
+          <select
+            value={skill}
+            onChange={(event) => setSkill(event.target.value)}
+          >
+            <option>Frontend</option>
+            <option>Backend</option>
+            <option>UI/UX</option>
+          </select>
+
+          <button type="submit" className="post-button">
+            Add Project
+          </button>
+        </form>
+      )}
 
       <section className="filter-section">
         <label htmlFor="skill-filter">Filter by skill:</label>
