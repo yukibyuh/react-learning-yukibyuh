@@ -250,3 +250,17 @@ body {
 .project-form textarea {
   min-height: 100px;
 }
+
+.contact-page {
+  background: white;
+  padding: 32px;
+  border-radius: 22px;
+  margin-top: 24px;
+}
+
+.contact-card {
+  background: #eef3ff;
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 20px;
+}
